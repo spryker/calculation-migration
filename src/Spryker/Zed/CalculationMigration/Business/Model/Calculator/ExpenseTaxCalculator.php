@@ -7,22 +7,23 @@
 namespace Spryker\Zed\CalculationMigration\Business\Model\Calculator;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface;
 use Spryker\Zed\Tax\Business\TaxFacadeInterface;
 
 class ExpenseTaxCalculator implements CalculatorInterface
 {
 
     /**
-     * @var TaxFacadeInterface
+     * @var \Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface
      */
-    protected $taxFacade;
+    protected $accruedTaxCalculator;
 
     /**
-     * @param TaxFacadeInterface $taxFacade
+     * @param \Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface $accruedTaxCalculator
      */
-    public function __construct(TaxFacadeInterface $taxFacade)
+    public function __construct(AccruedTaxCalculatorInterface $accruedTaxCalculator)
     {
-        $this->taxFacade = $taxFacade;
+        $this->accruedTaxCalculator = $accruedTaxCalculator;
     }
 
     /**
@@ -32,7 +33,7 @@ class ExpenseTaxCalculator implements CalculatorInterface
      */
     public function recalculate(QuoteTransfer $quoteTransfer)
     {
-        $this->taxFacade->resetAccruedTaxCalculatorRoundingErrorDelta();
+        $this->accruedTaxCalculator->resetRoundingErrorDelta();
         foreach ($quoteTransfer->getExpenses() as $expenseTransfer) {
             $unitTaxAmount = $this->calculateTaxAmount(
                 $expenseTransfer->getUnitGrossPrice(),
@@ -60,7 +61,7 @@ class ExpenseTaxCalculator implements CalculatorInterface
      */
     protected function calculateTaxAmount($price, $taxRate)
     {
-        return $this->taxFacade->getTaxAmountFromGrossPrice($price, $taxRate);
+        return $this->accruedTaxCalculator->getTaxValueFromPrice($price, $taxRate);
     }
 
 }

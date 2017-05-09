@@ -12,7 +12,7 @@ use Spryker\Zed\Calculation\Dependency\Plugin\CalculatorPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \Spryker\Zed\CalculationMigration\Business\CalculationMigrationMigrationFacade getFacade()
+ * @method \Spryker\Zed\CalculationMigration\Business\CalculationMigrationFacade getFacade()
  * @method \Spryker\Zed\CalculationMigration\Communication\CalculationMigrationCommunicationFactory getFactory()
  */
 class ItemsWithProductOptionsAndDiscountsTaxCalculatorPlugin extends AbstractPlugin implements CalculatorPluginInterface

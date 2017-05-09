@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\CalculationMigration\Communication\Plugin\Calculator;
+namespace Spryker\Zed\CalculationMigration\Communication\Plugin;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Calculation\Dependency\Plugin\CalculatorPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \Spryker\Zed\CalculationMigration\Business\CalculationMigrationMigrationFacade getFacade()
+ * @method \Spryker\Zed\CalculationMigration\Business\CalculationMigrationFacade getFacade()
  * @method \Spryker\Zed\CalculationMigration\Communication\CalculationMigrationCommunicationFactory getFactory()
  */
 class TaxTotalAmountWithProductOptionsAndDiscountsCalculatorPlugin extends AbstractPlugin implements CalculatorPluginInterface

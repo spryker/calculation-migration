@@ -16,7 +16,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  * @method \Spryker\Zed\CalculationMigration\Business\CalculationMigrationBusinessFactory getFactory()
  * @method \Spryker\Zed\CalculationMigration\CalculationMigrationConfig getConfig()
  */
-class CalculationMigrationMigrationFacade extends AbstractFacade implements CalculationMigrationFacadeInterface
+class CalculationMigrationFacade extends AbstractFacade implements CalculationMigrationFacadeInterface
 {
 
     /**

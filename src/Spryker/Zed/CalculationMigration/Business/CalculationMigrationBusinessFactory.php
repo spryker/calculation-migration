@@ -29,6 +29,8 @@ use Spryker\Zed\CalculationMigration\Business\Model\Calculator\SumGrossCalculate
 use Spryker\Zed\CalculationMigration\Business\Model\Calculator\TaxCalculation;
 use Spryker\Zed\CalculationMigration\CalculationMigrationDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use Spryker\Zed\Tax\Business\Model\AccruedTaxCalculator;
+use Spryker\Zed\Tax\Business\Model\PriceCalculationHelper;
 
 /**
  * @method \Spryker\Zed\CalculationMigration\CalculationMigrationConfig getConfig()
@@ -189,7 +191,7 @@ class CalculationMigrationBusinessFactory extends AbstractBusinessFactory
      */
     public function createTaxItemAmountCalculator()
     {
-        return new ItemTaxCalculator($this->getTaxFacade());
+        return new ItemTaxCalculator($this->createAccruedTaxCalculator());
     }
 
     /**
@@ -197,7 +199,23 @@ class CalculationMigrationBusinessFactory extends AbstractBusinessFactory
      */
     public function createExpenseTaxCalculator()
     {
-        return new ExpenseTaxCalculator($this->getTaxFacade());
+        return new ExpenseTaxCalculator($this->createAccruedTaxCalculator());
+    }
+
+    /**
+     * @return \Spryker\Zed\Tax\Business\Model\AccruedTaxCalculator
+     */
+    public function createAccruedTaxCalculator()
+    {
+        return new AccruedTaxCalculator($this->createPriceCalculationHelper());
+    }
+
+    /**
+     * @return \Spryker\Zed\Tax\Business\Model\PriceCalculationHelperInterface
+     */
+    public function createPriceCalculationHelper()
+    {
+        return new PriceCalculationHelper();
     }
 
     /**

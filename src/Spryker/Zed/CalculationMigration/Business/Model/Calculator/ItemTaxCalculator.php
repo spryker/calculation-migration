@@ -7,22 +7,23 @@
 namespace Spryker\Zed\CalculationMigration\Business\Model\Calculator;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface;
 use Spryker\Zed\Tax\Business\TaxFacadeInterface;
 
 class ItemTaxCalculator implements CalculatorInterface
 {
 
     /**
-     * @var \Spryker\Zed\Tax\Business\TaxFacadeInterface
+     * @var \Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface $accruedTaxCalculator
      */
     protected $accruedTaxCalculator;
 
     /**
-     * @param \Spryker\Zed\Tax\Business\TaxFacadeInterface $taxFacadeInterface
+     * @param \Spryker\Zed\Tax\Business\Model\AccruedTaxCalculatorInterface $accruedTaxCalculator
      */
-    public function __construct(TaxFacadeInterface $taxFacadeInterface)
+    public function __construct(AccruedTaxCalculatorInterface $accruedTaxCalculator)
     {
-        $this->accruedTaxCalculator = $taxFacadeInterface;
+        $this->accruedTaxCalculator = $accruedTaxCalculator;
     }
 
     /**
@@ -32,7 +33,7 @@ class ItemTaxCalculator implements CalculatorInterface
      */
     public function recalculate(QuoteTransfer $quoteTransfer)
     {
-        $this->accruedTaxCalculator->resetAccruedTaxCalculatorRoundingErrorDelta();
+        $this->accruedTaxCalculator->resetRoundingErrorDelta();
 
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
 
@@ -57,7 +58,7 @@ class ItemTaxCalculator implements CalculatorInterface
             $itemTransfer->setSumTaxAmount((int)round($sumTaxAmount));
 
             $itemTransfer->setUnitTaxAmount((int)round($itemTransfer->getUnitTaxAmount()));
-            $itemTransfer->setSumTaxAmount((int)round($itemTransfer->getSumTaxAmount()));
+            $itemTransfer->getSumTaxAmount((int)round($itemTransfer->getSumTaxAmount()));
         }
     }
 
@@ -69,7 +70,7 @@ class ItemTaxCalculator implements CalculatorInterface
      */
     protected function calculateTaxAmount($price, $taxRate)
     {
-        return $this->accruedTaxCalculator->getAccruedTaxAmountFromGrossPrice($price, $taxRate);
+        return $this->accruedTaxCalculator->getTaxValueFromPrice($price, $taxRate);
     }
 
 }
