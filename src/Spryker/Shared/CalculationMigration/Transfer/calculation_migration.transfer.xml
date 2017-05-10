@@ -29,6 +29,8 @@
         <property name="sumItemTotal" type="int" />
         <property name="unitTaxTotal" type="int" />
         <property name="sumTaxTotal" type="int" />
+        <property name="finalUnitDiscountAmount" type="int" />
+        <property name="finalSumDiscountAmount" type="int" />
     </transfer>
 
     <transfer name="Order">

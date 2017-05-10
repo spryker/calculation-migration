@@ -316,6 +316,9 @@ class ProductOptionDiscounts implements OrderAmountAggregatorInterface, Calculat
             $itemTransfer->setUnitItemTotal($itemTransfer->getUnitGrossPriceWithProductOptionAndDiscountAmounts());
             $itemTransfer->setSumItemTotal($itemTransfer->getSumGrossPriceWithProductOptionAndDiscountAmounts());
 
+            $itemTransfer->setRefundableAmount(
+                (int)round($itemTransfer->getRefundableAmount() - $sumDiscountAmountWithOptions)
+            );
         }
     }
 
