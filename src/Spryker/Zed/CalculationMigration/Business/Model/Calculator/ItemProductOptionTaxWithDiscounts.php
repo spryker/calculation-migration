@@ -11,10 +11,9 @@ use ArrayObject;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Zed\SalesAggregator\Business\Model\OrderAmountAggregator\OrderAmountAggregatorInterface;
 use Spryker\Zed\Tax\Business\TaxFacadeInterface;
 
-class ItemProductOptionTaxWithDiscounts implements OrderAmountAggregatorInterface, CalculatorInterface
+class ItemProductOptionTaxWithDiscounts implements CalculatorInterface
 {
 
     /**
